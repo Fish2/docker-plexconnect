@@ -1,9 +1,10 @@
-This is a Dockerfile setup for PlexConnect - https://github.com/CyberGhost84/PlexConnect
+This is a Docker setup for PlexConnect using the CyberGhost84 fork.
+https://github.com/CyberGhost84/PlexConnect
 
 To run:
 
 ```
-docker run -d --host="name" --name="plexconnect" -v /path/to/plexconnect/ssl:/opt/plexconnect/assets/certificates:rw -v /etc/localtime:/etc/localtime:ro -p 80:80 rwohleb/plexconnect
+docker run -d --net="host" --name="plexconnect" -v /path/to/plexconnect/config:/config:rw -v /etc/localtime:/etc/localtime:ro -p 80:80 rwohleb/plexconnect
 ```
 
 FIRST TIME USERS
@@ -20,4 +21,4 @@ FIRST TIME USERS
 RETURNING USERS
 ---
 
-Put your SSL certificates in /path/to/plexconnect/ssl if they do not exist the docker will generate them for you.
+Put your SSL certificates in /path/to/plexconnect/config/certificates. If they do not exist the docker image will generate them for you.
