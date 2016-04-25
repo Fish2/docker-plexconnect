@@ -62,6 +62,9 @@ if [ -f /config/certificates/trailers.pem ] ; then
   ln -s /config/certificates/trailers.pem /opt/plexconnect/assets/certificates/trailers.pem
   ln -s /config/certificates/trailers.cer /opt/plexconnect/assets/certificates/trailers.cer
 else
+  if [ ! -d /config/certificates ]; then
+    mkdir /config/certificates
+  fi
   if [ -f /opt/plexconnect/assets/certificates/trailers.pem ]; then
     mv /opt/plexconnect/assets/certificates/trailers.key /config/certificates/trailers.key
     mv /opt/plexconnect/assets/certificates/trailers.pem /config/certificates/trailers.pem
