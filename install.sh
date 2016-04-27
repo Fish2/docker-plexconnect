@@ -6,7 +6,7 @@ ln -s -f /bin/true /usr/bin/chfn
 apt-get -q update
 apt-get install -qy python python-dev python-imaging wget unzip
 
-wget -q "https://github.com/CyberGhost84/PlexConnect/archive/master.zip" -O /tmp/plexconnect.zip
+wget -q "https://github.com/rwohleb/PlexConnect/archive/master.zip" -O /tmp/plexconnect.zip
 if [ $? -eq 0 ]; then
   unzip /tmp/plexconnect.zip
   mv PlexConnect-master/ /opt/plexconnect

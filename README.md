@@ -1,4 +1,5 @@
-This is a Docker setup for PlexConnect using the CyberGhost84 fork.
+This is a Docker setup for PlexConnect using the rwohleb fork of the CyberGhost84 fork.
+https://github.com/rwohleb/PlexConnect
 https://github.com/CyberGhost84/PlexConnect
 
 To run:
