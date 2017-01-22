@@ -2,10 +2,10 @@ This is a Docker setup for PlexConnect using the rwohleb fork of the CyberGhost8
 https://github.com/rwohleb/PlexConnect
 https://github.com/CyberGhost84/PlexConnect
 
-To run:
+**sample create command:**
 
 ```
-docker run -d --net="host" --name="plexconnect" -v /path/to/plexconnect/config:/config:rw -v /etc/localtime:/etc/localtime:ro -p 80:80 rwohleb/plexconnect
+docker create --name=plexconnect --restart=always --net=host -v /docker/containers/plexconnect/config:/config:rw -e PGID=1000 -e PUID=1000 -e TZ=Europe/London -p 80:80 rwohleb/plexconnect
 ```
 
 FIRST TIME USERS
