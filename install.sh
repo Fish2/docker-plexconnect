@@ -4,7 +4,7 @@
 ln -s -f /bin/true /usr/bin/chfn
 
 [[ ! -d "/app/plexconnect/.git" ]] && \
-	git clone https://github.com/iBaa/PlexConnect /app/plexconnect
+	git clone https://github.com/rwohleb/PlexConnect /app/plexconnect
 
 # Fix a Debianism of PlexConnect's uid being 101
 usermod -u 99 plexconnect
