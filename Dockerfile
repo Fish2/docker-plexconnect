@@ -5,6 +5,7 @@ MAINTAINER fish2
 # Set correct environment variables
 ENV HOME /root
 ENV DEBIAN_FRONTEND="noninteractive"
+ENV PYTHONIOENCODING="UTF-8"
 ENV LC_ALL C.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
@@ -19,11 +20,12 @@ RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
 ADD install.sh /
 RUN bash /install.sh
 
-# clean up
+# Clean Up
 RUN apt-get clean all && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Use baseimage-docker's init system
 CMD ["/sbin/my_init"]
 
+# Ports, Entry Points and Volumes
 EXPOSE 80 443 53
 VOLUME /config

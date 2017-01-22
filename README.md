@@ -1,7 +1,6 @@
 # fish2/docker-plexconnect
 
-This is a Docker setup for PlexConnect using the iBaa master.
-https://github.com/rwohleb/PlexConnect
+This is a Docker setup for PlexConnect using https://github.com/rwohleb/PlexConnect fork Updated to use phusion/baseimage:0.9.19
 
 **sample create command:**
 
