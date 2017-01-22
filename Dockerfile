@@ -10,7 +10,7 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
 # Install Packages
-RUN apt-get -q update && apt-get install -qy python python-dev python-imaging
+RUN apt-get update && apt-get install -y python python-dev python-imaging git
 
 # Disable SSH
 RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
