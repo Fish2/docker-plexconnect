@@ -3,6 +3,7 @@
 # chfn workaround - Known issue within Dockers
 ln -s -f /bin/true /usr/bin/chfn
 
+# Clone Git
 git clone https://github.com/rwohleb/PlexConnect /opt/plexconnect
 
 # Fix a Debianism of PlexConnect's uid being 101
