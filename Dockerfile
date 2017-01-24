@@ -10,6 +10,9 @@ ENV LC_ALL C.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
 
+# Upgrade as baseimage 0.9.19 has some out dated packages like python and openssl
+RUN apt-get update && apt-get upgrade -y -o Dpkg::Options::="--force-confold"
+
 # Install Packages
 RUN apt-get update && apt-get install -y python python-dev python-imaging git
 
