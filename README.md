@@ -1,5 +1,5 @@
 # fish2/docker-plexconnect
-
+[![](https://images.microbadger.com/badges/image/fish2/docker-plexconnect.svg)](https://microbadger.com/images/fish2/docker-plexconnect "Get your own image badge on microbadger.com")
 **Purpose**
 Create a container running the Plexconnect
 This is a Docker setup for PlexConnect using https://github.com/rwohleb/PlexConnect fork Updated to use phusion/baseimage:0.9.19
