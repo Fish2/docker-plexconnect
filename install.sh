@@ -4,7 +4,7 @@
 ln -s -f /bin/true /usr/bin/chfn
 
 # Clone Git
-git clone https://github.com/rwohleb/PlexConnect /opt/plexconnect
+git clone https://github.com/iBaa/PlexConnect /opt/plexconnect
 
 # Fix a Debianism of PlexConnect's uid being 101
 usermod -u 99 plexconnect
@@ -63,7 +63,7 @@ else
     mv /opt/plexconnect/assets/certificates/trailers.pem /config/certificates/trailers.pem
     mv /opt/plexconnect/assets/certificates/trailers.cer /config/certificates/trailers.cer
   else
-    openssl req -new -nodes -newkey rsa:2048 -out /config/certificates/trailers.pem -keyout /config/certificates/trailers.key -x509 -days 7300 -subj "/C=US/CN=www.icloud.com"
+    openssl req -new -nodes -newkey rsa:2048 -out /config/certificates/trailers.pem -keyout /config/certificates/trailers.key -x509 -days 7300 -subj "/C=US/CN=trailers.apple.com"
     openssl x509 -in /config/certificates/trailers.pem -outform der -out /config/certificates/trailers.cer && cat /config/certificates/trailers.key >> /config/certificates/trailers.pem
   fi
 
