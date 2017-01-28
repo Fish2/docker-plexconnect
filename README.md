@@ -3,7 +3,7 @@
 
 **Purpose**
 Create a container running the Plexconnect
-This is a Docker setup for PlexConnect using https://github.com/rwohleb/PlexConnect fork Updated to use phusion/baseimage:0.9.19
+This is a Docker setup for PlexConnect using https://github.com/Fish2/PlexConnect fork Updated to use phusion/baseimage:0.9.19
 
 **Create Command**
 
@@ -13,5 +13,4 @@ This is a Docker setup for PlexConnect using https://github.com/rwohleb/PlexConn
 Put your SSL certificates in /path/to/plexconnect/config/certificates. If they do not exist the docker image will generate them for you.
 
 **Credits**
-rwohleb <rob@tispork.com>
 fish2
