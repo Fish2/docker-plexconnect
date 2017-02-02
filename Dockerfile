@@ -21,7 +21,7 @@ ADD install.sh /
 RUN bash /install.sh
 
 # Clean Up
-RUN apt-get clean all && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Use baseimage-docker's init system
 CMD ["/sbin/my_init"]
