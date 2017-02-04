@@ -6,9 +6,6 @@ MAINTAINER fish2
 ENV HOME /root
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV PYTHONIOENCODING="UTF-8"
-ENV LC_ALL C.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
 
 # Install Update and Install Packages
 RUN apt-get update && apt-get install -y git python python-dev python-imaging \
