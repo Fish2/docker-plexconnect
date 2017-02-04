@@ -48,11 +48,14 @@ if [[ -f /config/certificates/trailers.pem && -f /opt/plexconnect/certificates/t
   ln -s /config/certificates/trailers.key /opt/plexconnect/assets/certificates/trailers.key
   ln -s /config/certificates/trailers.pem /opt/plexconnect/assets/certificates/trailers.pem
   ln -s /config/certificates/trailers.cer /opt/plexconnect/assets/certificates/trailers.cer
-elif [[ ! -d /config/certificates && -f /opt/plexconnect/assets/certificates/trailers.pem ]]; then
-  mkdir /config/certificates
+elif [[ ! -f /config/certificates/trailers.pem && -f /opt/plexconnect/assets/certificates/trailers.pem ]]; then
   mv /opt/plexconnect/assets/certificates/trailers.key /config/certificates/trailers.key
   mv /opt/plexconnect/assets/certificates/trailers.pem /config/certificates/trailers.pem
   mv /opt/plexconnect/assets/certificates/trailers.cer /config/certificates/trailers.cer
+  ln -s /config/certificates/trailers.key /opt/plexconnect/assets/certificates/trailers.key
+  ln -s /config/certificates/trailers.pem /opt/plexconnect/assets/certificates/trailers.pem
+  ln -s /config/certificates/trailers.cer /opt/plexconnect/assets/certificates/trailers.cer
+elif [[ -f /config/certificates/trailers.pem && ! -f /opt/plexconnect/assets/certificates/trailers.pem ]]; then
   ln -s /config/certificates/trailers.key /opt/plexconnect/assets/certificates/trailers.key
   ln -s /config/certificates/trailers.pem /opt/plexconnect/assets/certificates/trailers.pem
   ln -s /config/certificates/trailers.cer /opt/plexconnect/assets/certificates/trailers.cer
