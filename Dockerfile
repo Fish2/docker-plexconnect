@@ -18,7 +18,7 @@ ADD install.sh /
 RUN bash /install.sh \
 
 # Clean Up
-&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && apt-get autoremove -y
+&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && apt-get remove --purge -y python-dev && apt-get autoremove -y
 
 # Use baseimage-docker's init system
 CMD ["/sbin/my_init"]
