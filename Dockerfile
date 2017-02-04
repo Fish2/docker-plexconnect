@@ -6,16 +6,16 @@ MAINTAINER fish2
 ENV HOME /root
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV PYTHONIOENCODING="UTF-8"
+ADD install.sh /tmp
 
 # Install Update and Install Packages
 RUN apt-get update && apt-get install -y git python python-dev python-imaging \
 
 # Disable SSH
-&& rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
+&& rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh \
 
 # Install PlexConnect
-ADD install.sh /
-RUN bash /install.sh \
+&& bash /tmp/install.sh \
 
 # Clean Up
 && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && apt-get remove --purge -y python-dev && apt-get autoremove -y
