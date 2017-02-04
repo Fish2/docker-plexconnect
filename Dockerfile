@@ -8,6 +8,9 @@ ENV DEBIAN_FRONTEND="noninteractive"
 ENV PYTHONIOENCODING="UTF-8"
 ADD install.sh /tmp
 
+# Use baseimage-docker's init system.
+CMD ["/sbin/my_init"]
+
 # Install Update and Install Packages
 RUN apt-get update && apt-get install -y git python python-dev python-imaging \
 
