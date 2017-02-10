@@ -41,14 +41,13 @@ else
   ln -s /config/ATVSettings.cfg /opt/plexconnect/ATVSettings.cfg
 fi
 
-if [[ -f /config/certificates/trailers.pem && -f /opt/plexconnect/certificates/trailers.pem ]]; then
+if [[ -f /config/certificates/trailers.pem && -f /opt/plexconnect/assets/certificates/trailers.pem ]]; then
   rm /opt/plexconnect/assets/certificates/trailers.key
   rm /opt/plexconnect/assets/certificates/trailers.pem
   rm /opt/plexconnect/assets/certificates/trailers.cer
   ln -s /config/certificates/trailers.key /opt/plexconnect/assets/certificates/trailers.key
   ln -s /config/certificates/trailers.pem /opt/plexconnect/assets/certificates/trailers.pem
   ln -s /config/certificates/trailers.cer /opt/plexconnect/assets/certificates/trailers.cer
-  echo "found certs in defind config folder and opt folder remove opt flder certs and ln";
 elif [[ ! -f /config/certificates/trailers.pem && -f /opt/plexconnect/assets/certificates/trailers.pem ]]; then
   mv /opt/plexconnect/assets/certificates/trailers.key /config/certificates/trailers.key
   mv /opt/plexconnect/assets/certificates/trailers.pem /config/certificates/trailers.pem
@@ -56,21 +55,16 @@ elif [[ ! -f /config/certificates/trailers.pem && -f /opt/plexconnect/assets/cer
   ln -s /config/certificates/trailers.key /opt/plexconnect/assets/certificates/trailers.key
   ln -s /config/certificates/trailers.pem /opt/plexconnect/assets/certificates/trailers.pem
   ln -s /config/certificates/trailers.cer /opt/plexconnect/assets/certificates/trailers.cer
-  echo "no certs found in defind config folder but were found in opt folder moving them to config folder and ln to opt";
 elif [[ -f /config/certificates/trailers.pem && ! -f /opt/plexconnect/assets/certificates/trailers.pem ]]; then
   ln -s /config/certificates/trailers.key /opt/plexconnect/assets/certificates/trailers.key
   ln -s /config/certificates/trailers.pem /opt/plexconnect/assets/certificates/trailers.pem
   ln -s /config/certificates/trailers.cer /opt/plexconnect/assets/certificates/trailers.cer
-  echo "found certs in defind config folder creating ln to opt folder";
-elif [[ ! -f /config/certificates/trailers.pem && ! -f /opt/plexconnect/assets/certificates/trailers.pem ]]; then
+else
   openssl req -new -nodes -newkey rsa:2048 -out /config/certificates/trailers.pem -keyout /config/certificates/trailers.key -x509 -days 7300 -subj "/C=US/CN=trailers.apple.com"
   openssl x509 -in /config/certificates/trailers.pem -outform der -out /config/certificates/trailers.cer && cat /config/certificates/trailers.key >> /config/certificates/trailers.pem
   ln -s /config/certificates/trailers.key /opt/plexconnect/assets/certificates/trailers.key
   ln -s /config/certificates/trailers.pem /opt/plexconnect/assets/certificates/trailers.pem
   ln -s /config/certificates/trailers.cer /opt/plexconnect/assets/certificates/trailers.cer
-  echo "creating certs non found";
-else
-  echo "error";
 fi
 
 # Give PlexConnect a chance to generate default settings files.
