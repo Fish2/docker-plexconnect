@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y git python python-dev python-imaging \
 && bash /tmp/install.sh \
 
 # Clean Up
-&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && apt-get remove --purge -y python-dev && apt-get autoremove -y
+&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/crontab /etc/service/cron /etc/cron.* && apt-get remove --purge -y python-dev cron && apt-get autoremove -y
 
 # Ports, Entry Points and Volumes
 EXPOSE 80 443 53
