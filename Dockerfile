@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.9.19
+FROM phusion/baseimage:0.9.20
 MAINTAINER fish2
 # FORK FROM rwohleb/docker-plexconnect on GitHub
 
@@ -6,7 +6,7 @@ MAINTAINER fish2
 ENV HOME /root
 ENV DEBIAN_FRONTEND="noninteractive"
 ENV PYTHONIOENCODING="UTF-8"
-ADD install.sh /tmp
+COPY install.sh /tmp
 
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
