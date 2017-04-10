@@ -3,7 +3,7 @@
 
 **Purpose**
 Create a container running the Plexconnect
-This is a Docker setup for PlexConnect using https://github.com/Fish2/PlexConnect fork Updated to use phusion/baseimage:0.9.19
+This is a Docker setup for PlexConnect using https://github.com/Fish2/PlexConnect fork Updated to use phusion/baseimage:0.9.20
 
 **Create Command**
 
