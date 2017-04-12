@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.9.20
+FROM phusion/baseimage:0.9.21
 MAINTAINER fish2
 # FORK FROM rwohleb/docker-plexconnect on GitHub
 
