@@ -26,3 +26,6 @@ RUN apt-get update && apt-get install -y git python python-dev python-imaging \
 # Ports, Entry Points and Volumes
 EXPOSE 80 443 53
 VOLUME /config
+
+# Use baseimage-docker's init system
+CMD ["/sbin/my_init"]
