@@ -1,16 +1,11 @@
 #!/bin/bash
 
-# chfn workaround - Known issue within Dockers
-ln -s -f /bin/true /usr/bin/chfn
-
 # Clone Git
 git clone https://github.com/Fish2/PlexConnect /opt/plexconnect
 
 # Fix a Debianism of PlexConnect's uid being 101
 usermod -u 99 plexconnect
 usermod -g 100 plexconnect
-usermod -d /home plexconnect
-chown -R plexconnect:users /home
 chown -R plexconnect:users /opt/plexconnect
 
 # Add PlexConnect to runit
@@ -18,6 +13,10 @@ mkdir -p /etc/service/plexconnect
 cat <<'EOT' > /etc/service/plexconnect/run
 #!/bin/bash
 umask 000
+
+cd /opt/plexconnect
+git pull
+cd /
 
 if [[ -f /config/Settings.cfg && -f /opt/plexconnect/Settings.cfg ]]; then
   rm /opt/plexconnect/Settings.cfg
