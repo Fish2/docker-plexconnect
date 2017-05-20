@@ -60,6 +60,7 @@ elif [[ -f /config/certificates/trailers.pem && ! -f /opt/plexconnect/assets/cer
   ln -s /config/certificates/trailers.pem /opt/plexconnect/assets/certificates/trailers.pem
   ln -s /config/certificates/trailers.cer /opt/plexconnect/assets/certificates/trailers.cer
 else
+  mkdir -p /config/certificates
   openssl req -new -nodes -newkey rsa:2048 -out /config/certificates/trailers.pem -keyout /config/certificates/trailers.key -x509 -days 7300 -subj "/C=US/CN=trailers.apple.com"
   openssl x509 -in /config/certificates/trailers.pem -outform der -out /config/certificates/trailers.cer && cat /config/certificates/trailers.key >> /config/certificates/trailers.pem
   ln -s /config/certificates/trailers.key /opt/plexconnect/assets/certificates/trailers.key
