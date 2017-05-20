@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y git python python-dev python-imaging \
 # Disable SSH
 && rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh \
 
-# Remove syslog-ng
+# Disable syslog-ng
 && rm -rf /etc/syslog-ng /etc/init.d/syslog-ng \
 
 # Install PlexConnect
@@ -27,5 +27,5 @@ RUN apt-get update && apt-get install -y git python python-dev python-imaging \
 && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/crontab /etc/service/cron /etc/cron.* && apt-get remove --purge -y python-dev cron && apt-get autoremove -y
 
 # Ports, Entry Points and Volumes
-EXPOSE 80 443 53
+EXPOSE 53 80 443
 VOLUME /config
