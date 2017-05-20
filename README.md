@@ -12,5 +12,8 @@ This is a Docker setup for PlexConnect using https://github.com/Fish2/PlexConnec
 **SSl**
 Put your SSL certificates in /path/to/plexconnect/config/certificates. If they do not exist the docker image will generate them for you.
 
+**Updates**
+This docker auto pulls updates on restart
+
 **Credits**
 fish2
