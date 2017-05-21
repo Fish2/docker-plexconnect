@@ -15,7 +15,7 @@ cat <<'EOT' > /etc/service/plexconnect/run
 umask 000
 
 cd /opt/plexconnect
-git pull && echo "updated"
+git pull && echo "Checked and updated PlexConnect if necessary"
 cd /
 
 if [[ -f /config/Settings.cfg && -f /opt/plexconnect/Settings.cfg ]]; then
