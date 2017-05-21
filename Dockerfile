@@ -21,7 +21,10 @@ RUN apt-get update && apt-get install -y git python python-dev python-imaging \
 && bash /tmp/install.sh \
 
 # Clean Up
-&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/crontab /etc/service/cron /etc/cron.* && apt-get remove --purge -y python-dev cron && apt-get autoremove -y
+&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/crontab /etc/service/cron /etc/cron.* && apt-get remove --purge -y syslog-ng-core python-dev cron && apt-get autoremove -y \
+
+# Disable syslog-ng
+&& rm -rf /etc/service/syslog-ng
 
 # Ports, Entry Points and Volumes
 EXPOSE 53 80 443
