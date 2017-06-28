@@ -17,6 +17,9 @@ RUN apt-get update && apt-get install -y git python python-dev python-imaging \
 # Disable SSH
 && rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh \
 
+# Generate Locale
+&& locale-gen en_US.UTF-8 \
+
 # Install PlexConnect
 && bash /tmp/install.sh \
 
