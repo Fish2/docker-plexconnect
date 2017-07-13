@@ -3,7 +3,7 @@ MAINTAINER fish2
 # FORK FROM rwohleb/docker-plexconnect on GitHub
 
 # Set correct environment variables
-ENV HOME /root \
+ENV HOME=/root \
     DEBIAN_FRONTEND="noninteractive"
 
 # Use baseimage-docker's init system.
