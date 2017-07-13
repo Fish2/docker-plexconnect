@@ -4,10 +4,7 @@ MAINTAINER fish2
 
 # Set correct environment variables
 ENV HOME /root \
-    DEBIAN_FRONTEND="noninteractive" \
-    LANG="en_US.UTF-8" \
-    LANGUAGE="en_US:en" \
-    LC_ALL="en_US.UTF-8"
+    DEBIAN_FRONTEND="noninteractive"
 
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
