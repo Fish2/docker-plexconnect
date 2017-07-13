@@ -3,22 +3,23 @@ MAINTAINER fish2
 # FORK FROM rwohleb/docker-plexconnect on GitHub
 
 # Set correct environment variables
-ENV HOME /root
-ENV DEBIAN_FRONTEND="noninteractive"
-ENV PYTHONIOENCODING="UTF-8"
-COPY install.sh /tmp
+ENV HOME /root \
+    DEBIAN_FRONTEND="noninteractive" \
+    LANG="en_US.UTF-8" \
+    LANGUAGE="en_US:en" \
+    LC_ALL="en_US.UTF-8"
 
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
+
+# Add Installer Script
+COPY install.sh /tmp
 
 # Install Update and Install Packages
 RUN apt-get update && apt-get install -y git python python-dev python-imaging \
 
 # Disable SSH
 && rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh \
-
-# Generate Locale
-&& locale-gen en_US.UTF-8 \
 
 # Install PlexConnect
 && bash /tmp/install.sh \
