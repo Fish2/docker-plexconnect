@@ -13,7 +13,7 @@ CMD ["/sbin/my_init"]
 COPY install.sh /tmp
 
 # Install Update and Install Packages
-RUN apt-get update && apt-get install -y git python python-dev python-imaging=3.3.2 \
+RUN apt-get update && apt-get install -y git python python-dev python-imaging \
 
 # Disable SSH
 && rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh \
