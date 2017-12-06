@@ -1,0 +1,63 @@
+#!/usr/bin/with-contenv bash
+
+UMASK_SET=${UMASK_SET:-022}
+umask "$UMASK_SET"
+
+cd /app/plexconnect
+git pull && echo "Checked and updated PlexConnect if necessary"
+cd /
+
+if [[ -f /config/Settings.cfg && -f /app/plexconnect/Settings.cfg ]]; then
+  rm /app/plexconnect/Settings.cfg
+  ln -s /config/Settings.cfg /app/plexconnect/Settings.cfg
+elif [[ ! -f /config/Settings.cfg && -f /app/plexconnect/Settings.cfg ]]; then
+  mv /app/plexconnect/Settings.cfg /config/Settings.cfg
+  ln -s /config/Settings.cfg /app/plexconnect/Settings.cfg
+else
+  touch /config/Settings.cfg
+  ln -s /config/Settings.cfg /app/plexconnect/Settings.cfg
+fi
+if [[ -f /config/ATVSettings.cfg && -f /app/plexconnect/ATVSettings.cfg ]]; then
+  rm /app/plexconnect/ATVSettings.cfg
+  ln -s /config/ATVSettings.cfg /app/plexconnect/ATVSettings.cfg
+elif [[ ! -f /config/ATVSettings.cfg && -f /app/plexconnect/ATVSettings.cfg ]]; then
+  mv /app/plexconnect/ATVSettings.cfg /config/ATVSettings.cfg
+  ln -s /config/ATVSettings.cfg /app/plexconnect/ATVSettings.cfg
+else
+  touch /config/ATVSettings.cfg
+  ln -s /config/ATVSettings.cfg /app/plexconnect/ATVSettings.cfg
+fi
+if [[ -f /config/certificates/trailers.pem && -f /app/plexconnect/assets/certificates/trailers.pem ]]; then
+  rm /app/plexconnect/assets/certificates/trailers.key
+  rm /app/plexconnect/assets/certificates/trailers.pem
+  rm /app/plexconnect/assets/certificates/trailers.cer
+  ln -s /config/certificates/trailers.key /app/plexconnect/assets/certificates/trailers.key
+  ln -s /config/certificates/trailers.pem /app/plexconnect/assets/certificates/trailers.pem
+  ln -s /config/certificates/trailers.cer /app/plexconnect/assets/certificates/trailers.cer
+elif [[ ! -f /config/certificates/trailers.pem && -f /app/plexconnect/assets/certificates/trailers.pem ]]; then
+  mv /app/plexconnect/assets/certificates/trailers.key /config/certificates/trailers.key
+  mv /app/plexconnect/assets/certificates/trailers.pem /config/certificates/trailers.pem
+  mv /app/plexconnect/assets/certificates/trailers.cer /config/certificates/trailers.cer
+  ln -s /config/certificates/trailers.key /app/plexconnect/assets/certificates/trailers.key
+  ln -s /config/certificates/trailers.pem /app/plexconnect/assets/certificates/trailers.pem
+  ln -s /config/certificates/trailers.cer /app/plexconnect/assets/certificates/trailers.cer
+elif [[ -f /config/certificates/trailers.pem && ! -f /app/plexconnect/assets/certificates/trailers.pem ]]; then
+  ln -s /config/certificates/trailers.key /app/plexconnect/assets/certificates/trailers.key
+  ln -s /config/certificates/trailers.pem /app/plexconnect/assets/certificates/trailers.pem
+  ln -s /config/certificates/trailers.cer /app/plexconnect/assets/certificates/trailers.cer
+else
+  mkdir -p /config/certificates
+  openssl req -new -nodes -newkey rsa:2048 -out /config/certificates/trailers.pem -keyout /config/certificates/trailers.key -x509 -days 7300 -subj "/C=US/CN=trailers.apple.com"
+  openssl x509 -in /config/certificates/trailers.pem -outform der -out /config/certificates/trailers.cer && cat /config/certificates/trailers.key >> /config/certificates/trailers.pem
+  ln -s /config/certificates/trailers.key /app/plexconnect/assets/certificates/trailers.key
+  ln -s /config/certificates/trailers.pem /app/plexconnect/assets/certificates/trailers.pem
+  ln -s /config/certificates/trailers.cer /app/plexconnect/assets/certificates/trailers.cer
+fi
+
+# Give PlexConnect a chance to generate default settings files.
+/usr/bin/python /app/plexconnect/Settings.py
+/usr/bin/python /app/plexconnect/ATVSettings.py
+
+# Run PlexConnect
+exec \
+	s6-setuidgid root python /app/plexconnect/PlexConnect.py --data_dir=/config/data
