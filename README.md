@@ -1,25 +1,18 @@
-This is a Docker setup for PlexConnect using the rwohleb fork of the CyberGhost84 fork.
-https://github.com/rwohleb/PlexConnect
-https://github.com/CyberGhost84/PlexConnect
+# fish2/docker-plexconnect
+[![](https://images.microbadger.com/badges/image/fish2/docker-plexconnect.svg)](https://microbadger.com/images/fish2/docker-plexconnect "Get your own image badge on microbadger.com")
 
-To run:
+**Purpose**
+Create a Docker Container running the Plexconnect
+This is a Docker setup for PlexConnect using https://github.com/Fish2/PlexConnect Fork
+This Container is based on https://github.com/linuxserver/docker-baseimage-alpine-python
 
-```
-docker run -d --net="host" --name="plexconnect" -v /path/to/plexconnect/config:/config:rw -v /etc/localtime:/etc/localtime:ro -p 80:80 rwohleb/plexconnect
-```
+**Create Command**
 
-FIRST TIME USERS
----
+	docker create --name=plexconnect --restart=always -v </path for config>:/config -e TZ=<timezone> -e PGID=<gid> -e PUID=<uid> -p 53:53/udp -p 80:80/tcp -p 443:443/tcp fish2/docker-plexconnect
 
-** PlexConnect must listen on port 80 and port 443. So you must move the unRAID management interface to a new port. **
+**SSl**
+Put your SSL certificates in </path for config>/config/certificates. If they do not exist the docker container will generate them for you.
 
-1. Edit /boot/config/go
-2. Replace: /usr/local/sbin/emhttp &
-3. With: /usr/local/sbin/emhttp -p XX & (where XX equals the port)
-4. Shutdown your array
-5. Reboot unRAID
-
-RETURNING USERS
----
-
-Put your SSL certificates in /path/to/plexconnect/config/certificates. If they do not exist the docker image will generate them for you.
+**Credits**
+fish2
+linuxserver

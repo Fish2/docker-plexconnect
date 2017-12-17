@@ -1,24 +1,18 @@
-FROM phusion/baseimage:0.9.17
-MAINTAINER rwohleb <rob@tispork.com>
-# FORK FROM PDucharme-Plexconnect on GitHub
+FROM lsiobase/alpine.python:3.7
 
-# Set correct environment variables
-ENV HOME /root
-ENV DEBIAN_FRONTEND noninteractive
-ENV LC_ALL C.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US.UTF-8
+# set maintainer label
+LABEL maintainer="fish2"
 
-# Disable SSH
-RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
+# set python to use utf-8 rather than ascii.
+ENV PYTHONIOENCODING="UTF-8"
 
-# Install PlexConnect
-ADD install.sh /
-RUN bash /install.sh
+# install app
+RUN git clone https://github.com/Fish2/PlexConnect /app/plexconnect
 
-VOLUME /config
+# add local files
+COPY root/ /
 
+# ports and volumes
 EXPOSE 80 443 53
-
-# Use baseimage-docker's init system
-CMD ["/sbin/my_init"]
+WORKDIR /app/plexconnect
+VOLUME /config
