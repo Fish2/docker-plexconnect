@@ -1,12 +1,9 @@
 #!/usr/bin/with-contenv bash
 
-UMASK_SET=${UMASK_SET:-022}
-umask "$UMASK_SET"
+# Check and Update PlexConnect git hub pull
+echo "Checked and updated PlexConnect if necessary" && git -C /app/plexconnect pull
 
-cd /app/plexconnect
-git pull && echo "Checked and updated PlexConnect if necessary"
-cd /
-
+# Check if Settings.cfg already exists
 if [[ -f /config/Settings.cfg && -f /app/plexconnect/Settings.cfg ]]; then
   rm /app/plexconnect/Settings.cfg
   ln -s /config/Settings.cfg /app/plexconnect/Settings.cfg
@@ -17,6 +14,8 @@ else
   touch /config/Settings.cfg
   ln -s /config/Settings.cfg /app/plexconnect/Settings.cfg
 fi
+
+# Check if ATVSettings.cfg already exists
 if [[ -f /config/ATVSettings.cfg && -f /app/plexconnect/ATVSettings.cfg ]]; then
   rm /app/plexconnect/ATVSettings.cfg
   ln -s /config/ATVSettings.cfg /app/plexconnect/ATVSettings.cfg
@@ -27,6 +26,8 @@ else
   touch /config/ATVSettings.cfg
   ln -s /config/ATVSettings.cfg /app/plexconnect/ATVSettings.cfg
 fi
+
+# Check if Certificates already exist
 if [[ -f /config/certificates/trailers.pem && -f /app/plexconnect/assets/certificates/trailers.pem ]]; then
   rm /app/plexconnect/assets/certificates/trailers.key
   rm /app/plexconnect/assets/certificates/trailers.pem
@@ -60,4 +61,5 @@ fi
 
 # Run PlexConnect
 exec \
-	s6-setuidgid root python /app/plexconnect/PlexConnect.py --data_dir=/config/data
+	s6-setuidgid root python /app/plexconnect/PlexConnect.py \
+  --data_dir=/config/data
