@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv bash
 
 # permissions
-chown -R root:root \
+chown -f -R root:root \
 	/app \
 	/config
