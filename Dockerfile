@@ -4,7 +4,7 @@ FROM lsiobase/alpine.python:3.7
 LABEL maintainer="fish2"
 
 # install app
-RUN git clone --depth 1 https://github.com/Fish2/PlexConnect /app/plexconnect
+RUN git clone --depth 1 https://github.com/iBaa/PlexConnect /app/plexconnect
 
 # add local files
 COPY root/ /
