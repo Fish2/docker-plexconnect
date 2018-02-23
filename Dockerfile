@@ -12,4 +12,4 @@ COPY root/ /
 # ports and volumes
 EXPOSE 80 443 53
 VOLUME /config
-HEALTHCHECK --interval=1m --timeout=3s CMD curl -sf http://localhost/ || exit 1
+HEALTHCHECK --interval=1m --timeout=5s --retries=3 CMD curl -sSL -D - localhost -o /dev/null || exit 1
