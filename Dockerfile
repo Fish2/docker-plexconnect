@@ -1,4 +1,4 @@
-FROM lsiobase/alpine.python:3.7
+FROM lsiobase/alpine.python:3.8
 
 # set maintainer label
 LABEL maintainer="fish2"
